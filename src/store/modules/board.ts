@@ -3,7 +3,7 @@ import { ISetTurn, ITurns  } from "../../model/index";
 
 @Module({ stateFactory: true, namespaced: true, name: 'board' })
 export default class BoardModule extends VuexModule {
-    turns = ["#", "#", "#", "#", "#", "#", "#", "#", "#"];
+    turns = new Array(9).fill('#');
     computerTurn = "";
     turn = "";
     gameOn = false;

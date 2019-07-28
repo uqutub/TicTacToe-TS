@@ -16,12 +16,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Mutation, State, namespace } from "vuex-class";
+import { Mutation, State } from "vuex-class";
 import { ITurns, ISetTurn } from "../model/index";
+import { boardModule } from '../store';
 import Block from "./Block.vue";
 import Reset from "./Reset.vue";
 
-const boardModule = namespace("Board");
 
 @Component({
   components: {
@@ -83,11 +83,11 @@ export default class Board extends Vue {
         break;
       case null:
         alert("Sorry. Please type X or O");
-        window.location.reload(true);
+        this.gameReset();
         break;
       default:
         alert("Sorry. Please type X or O");
-        window.location.reload(true);
+        this.gameReset();
         break;
     }
   }
@@ -217,9 +217,14 @@ export default class Board extends Vue {
   }
 
   reset() {
-    this.setTurns(["#", "#", "#", "#", "#", "#", "#", "#", "#"]);
+    this.setTurns(new Array(9).fill('#'));
     this.count = 0;
     this.gameOn = true;
+  }
+
+  gameReset() {
+    this.reset();
+    this.startTheGame();
   }
 }
 </script>
